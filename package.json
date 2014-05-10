@@ -1,0 +1,15 @@
+{
+    "name": "slidepage",
+    "version": "0.0.2",
+    "author": "Inventorem <me@invntrm.ru>",
+    "description": "Simple client JS script makes page vertical slider behaviour. (latch smoth scroll)",
+    "main": "slidepage.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/a-x-/slidepage.git"
+    },
+    "dependencies": {
+        "jquery":"2.x",
+        "jquery.scrollTo":"1.x"
+    }
+}
