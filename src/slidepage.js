@@ -2,7 +2,7 @@
  * @file slidepage /
  * Created: 10.05.14 / 23:19
  */
-var slidepage = makeObjInit({'slidesSelector': '.slides>section'}, {
+var Slidepage = makeClass({
     frameNumber: 0,
     frameHeight: null,
     latchCounter: 0,
@@ -12,7 +12,8 @@ var slidepage = makeObjInit({'slidesSelector': '.slides>section'}, {
     framesCollection: [],
     framesPosCollection: [],
 
-    init: function () { var self = this; $(document).ready.call(this, function () {
+    init: function (slidesSelector) {
+        var self = this; $(document).ready.call(this, function () {
         $(document).keydown(function (event) {
             switch (event.which) {
                 case 38: // up
@@ -42,7 +43,7 @@ var slidepage = makeObjInit({'slidesSelector': '.slides>section'}, {
 //            this.onStepScroll(e);
 //        });
 
-        self.framesCollection = [].slice.call($(self.slidesSelector));
+        self.framesCollection = [].slice.call($(slidesSelector));
         self.framesPosCollection = self.framesCollection.map(function(el){
             return $(el).offset();
         });
@@ -104,4 +105,5 @@ var slidepage = makeObjInit({'slidesSelector': '.slides>section'}, {
         return this.framesPosCollection[frameNum > 0 ? frameNum : 0].top;
     }
 
-});
+}), slidepage = new Slidepage('.slides > section');
+slidepage;
