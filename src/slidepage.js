@@ -7,7 +7,7 @@ var Slidepage = makeClass({
     frameHeight: null,
     latchCounter: 0,
     lastPos: 0,
-    direction: 1,
+//    direction: 1,
     isReady: true,
     framesCollection: [],
     framesPosCollection: [],
@@ -47,6 +47,7 @@ var Slidepage = makeClass({
         self.framesPosCollection = self.framesCollection.map(function(el){
             return $(el).offset();
         });
+        self.framesCount = self.framesPosCollection.length;
         self.frameHeight = $(window).height();
     }); },
 
@@ -71,16 +72,17 @@ var Slidepage = makeClass({
     },
 
     stepScroll: function (e, isKeyboard, direct) {
+        var changeFrameDirection;
         var self = this;
         console.log('scroll!');
         if (
             this.lastPos - $(window).scrollTop() != this.frameHeight
                 && Math.abs(this.lastPos - $(window).scrollTop()) / this.frameHeight > 1.
             ) { // saved frame number is not correct
-            console.log('obsolete:', this.frameNumber, this.lastPos);
+//            console.log('obsolete:', this.frameNumber, this.lastPos);
             this.frameNumber = Math.floor($(window).scrollTop() / this.frameHeight);
-            this.direction = ($(window).scrollTop() - this.lastPos) > 0 ? 1 : -1;
-            this.frameNumber += this.direction;
+            changeFrameDirection = ($(window).scrollTop() - this.lastPos) > 0 ? 1 : -1;
+            this.changeFrame(changeFrameDirection);
             this.lastPos = $(window).scrollTop();
             console.log('corr.:', this.frameNumber, this.lastPos);
         }
@@ -88,10 +90,9 @@ var Slidepage = makeClass({
             this.latchCounter = 0;
             this.isReady = false;
             //
-            this.direction = (direct !== undefined) ? direct : ($(window).scrollTop() - this.lastPos) > 0 ? 1 : -1;
-            this.frameNumber += this.direction;
-            if (this.frameNumber < 0) {this.frameNumber = 0;}
-            console.log(e, 'DY', this.direction, 'last:', this.lastPos, 'diff:', $(window).scrollTop() - this.lastPos, 'cnt:', this.frameNumber);
+            changeFrameDirection = (direct !== undefined) ? direct : ($(window).scrollTop() - this.lastPos) > 0 ? 1 : -1;
+            this.changeFrame(changeFrameDirection);
+//            console.log(e, 'DY', this.direction, 'last:', this.lastPos, 'diff:', $(window).scrollTop() - this.lastPos, 'cnt:', this.frameNumber);
             $.scrollTo(this.posOfFrameNum(this.frameNumber), 500, {onAfter: function () {
                 setTimeout(function () {
                     self.isReady = true;
@@ -101,9 +102,14 @@ var Slidepage = makeClass({
         }
         e.preventDefault();
     },
-    posOfFrameNum: function(frameNum) {
-        return this.framesPosCollection[frameNum > 0 ? frameNum : 0].top;
+    posOfFrameNum: function() {
+        return this.framesPosCollection[this.frameNumber].top;
+    },
+    changeFrame:function(diffNumber){
+        var nextFrameNum = this.frameNumber + diffNumber;
+        if (nextFrameNum >= 0 && nextFrameNum < this.framesCount) {
+            this.frameNumber = nextFrameNum;
+        }
     }
 
 }), slidepage = new Slidepage('.slides > section');
-slidepage;
