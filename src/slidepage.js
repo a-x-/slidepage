@@ -112,4 +112,4 @@ var Slidepage = makeClass({
         }
     }
 
-}), slidepage = new Slidepage('.slides > section');
+});
