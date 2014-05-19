@@ -15,6 +15,7 @@
 .transition(@val){
   -webkit-transition: @val;-moz-transition: @val;-ms-transition: @val;-o-transition: @val;transition: @val;
 }
-.transform(@val) {
+.transform(@val, @point: center) {
   -webkit-transform: @val;-moz-transform: @val;-ms-transform: @val;-o-transform: @val;transform: @val;
+  -webkit-transform-origin: @point;transform-origin: @point;
 }
