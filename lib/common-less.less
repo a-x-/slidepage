@@ -3,24 +3,80 @@
  * Created: 14.05.14 / 19:29
  */
 .animation(@val) {
-  animation:@val;
-  -webkit-animation:@val;
+  animation: @val;
+  -webkit-animation: @val;
 }
 
 .animation2(@val1,@val2) {
-  animation:@val1 @val2;
-  -webkit-animation:@val1, @val2;
+  animation: @val1 @val2;
+  -webkit-animation: @val1, @val2;
 }
 
-.transition(@val){
-  -webkit-transition: @val;-moz-transition: @val;-ms-transition: @val;-o-transition: @val;transition: @val;
+.transition(@val) {
+  -webkit-transition: @val;
+  -moz-transition: @val;
+  -ms-transition: @val;
+  -o-transition: @val;
+  transition: @val;
 }
+
 .transform(@val, @point: center) {
-  -webkit-transform: @val;-moz-transform: @val;-ms-transform: @val;-o-transform: @val;transform: @val;
-  -webkit-transform-origin: @point;transform-origin: @point;
+  -webkit-transform: @val;
+  -moz-transform: @val;
+  -ms-transform: @val;
+  -o-transform: @val;
+  transform: @val;
+  -webkit-transform-origin: @point;
+  transform-origin: @point;
 }
 
-.appearance(@val){
-  -webkit-appearance: @val; -moz-apperance: @val; appearance: @val;
+.appearance(@val) {
+  -webkit-appearance: @val;
+  -moz-apperance: @val;
+  appearance: @val;
 }
 
+.text-outline (@color, @x: 1px) {
+  text-shadow: @x 0 0 @color, 0 @x 0 @color, -@x 0 0 @color, 0 -@x 0 @color;
+}
+
+.a-clear {
+  text-decoration: inherit;
+  color: inherit;
+  border: inherit;
+}
+
+.a-clear-hover {
+  color: black;
+  text-decoration: inherit;
+}
+
+.filter (@val) {
+  filter: @val;
+  -webkit-filter: @val;
+}
+
+.flex(@val:auto) {
+  -webkit-flex: @val;
+  flex: @val;
+}
+
+.display-flex() {
+  display: box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.hn {
+  color: #555;
+  margin: 1em 0 0 0;
+}
+
+.animated {
+  @ani-dur: 8s;
+  animation-duration: @ani-dur;
+  -webkit-animation-duration: @ani-dur;
+  @ani-del: 0s;
+  animation-delay: @ani-del;
+  -webkit-animation-delay: @ani-del;
+}

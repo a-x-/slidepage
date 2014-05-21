@@ -11,10 +11,12 @@ var Slidepage = makeClass({
     isReady: true,
     framesCollection: [],
     framesPosCollection: [],
+    isPageFreeze: false,
 
     init: function (slidesSelector) {
         var self = this; $(document).ready.call(this, function () {
         $(document).keydown(function (event) {
+            if(self.isPageFreeze && (event.which == 38 || event.which == 40)){event.preventDefault(); return}
             switch (event.which) {
                 case 38: // up
                     console.log('keyup scroll!');
@@ -30,6 +32,7 @@ var Slidepage = makeClass({
 //                event.preventDefault(); // prevent the default action (scroll / move caret)
         });
         $(window).on('mousewheel DOMMouseScroll', function (event) {
+            if(self.isPageFreeze){event.preventDefault(); return}
             if (!(event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0)) {
                 // scroll down
                 self.onStepScroll(event, false, +1);
