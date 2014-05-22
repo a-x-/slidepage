@@ -96,7 +96,7 @@ var Slidepage = makeClass({
             changeFrameDirection = (direct !== undefined) ? direct : ($(window).scrollTop() - this.lastPos) > 0 ? 1 : -1;
             this.changeFrame(changeFrameDirection);
 //            console.log(e, 'DY', this.direction, 'last:', this.lastPos, 'diff:', $(window).scrollTop() - this.lastPos, 'cnt:', this.frameNumber);
-            $.scrollTo(this.posOfFrameNum(this.frameNumber), 500, {onAfter: function () {
+            $.scrollTo({top:this.posOfFrameNum(this.frameNumber),left:0}, 500, {onAfter: function () {
                 setTimeout(function () {
                     self.isReady = true;
                 }, 100);
